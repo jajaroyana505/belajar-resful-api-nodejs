@@ -198,16 +198,16 @@ describe("DELETE /api/users/logout", function () {
     await createTestUser();
   });
 
-  // afterEach(async () => {
-  //   await removeTestUser();
-  // });
+  afterEach(async () => {
+    await removeTestUser();
+  });
   it("should can user logout", async () => {
     const result = await supertest(web)
       .delete("/api/users/logout")
       .set("Authorization", "test");
+
     expect(result.status).toBe(200);
-    expect(result.body.data.username).toBe("test");
-    logger.info(result);
+    expect(result.body.data).toBe("ok");
     const user = await getTestUser();
     expect(user.token).toBeNull();
   });

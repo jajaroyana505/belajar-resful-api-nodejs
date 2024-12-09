@@ -48,12 +48,12 @@ const update = async (req, res, next) => {
     next(e);
   }
 };
-const logout = async (res, req, next) => {
+const logout = async (req, res, next) => {
   try {
     const username = req.user.username;
     const result = await userService.logout(username);
     res.status(200).json({
-      date: result,
+      data: "ok",
     });
   } catch (e) {
     next(e);

@@ -131,6 +131,7 @@ const logout = async (username) => {
       username: username,
     },
   });
+
   if (!user) {
     throw new ResponseError(404, "User is not found");
   }
