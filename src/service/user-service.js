@@ -9,7 +9,6 @@ import { ResponseError } from "../error/response-error.js";
 import { validate } from "../validation/validation.js";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
-import { logger } from "../application/logging.js";
 
 const register = async (request) => {
   const user = validate(registerUserValidation, request);

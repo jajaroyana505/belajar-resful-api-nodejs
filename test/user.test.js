@@ -193,6 +193,7 @@ describe("PATCH /api/users/current", function () {
     expect(result.body.errors).toBeDefined;
   });
 });
+
 describe("DELETE /api/users/logout", function () {
   beforeEach(async () => {
     await createTestUser();
