@@ -3,6 +3,7 @@ import { ResponseError } from "../error/response-error.js";
 import {
   createContactValidation,
   getContactValidation,
+  updateContactValidation,
 } from "../validation/contact-validation";
 import { validate } from "../validation/validation.js";
 
@@ -38,9 +39,43 @@ const get = async (user, contactId) => {
     },
   });
   if (!contact) {
-    throw new ResponseError(401, "Conatct is not found");
+    throw new ResponseError(404, "Conatct is not found");
   }
   return contact;
 };
 
-export default { create, get };
+const update = async (user, request) => {
+  const contact = validate(updateContactValidation, request);
+  await get(user, contact.id);
+
+  return prismaClient.contact.update({
+    where: {
+      id: contact.id,
+    },
+    data: {
+      first_name: contact.first_name,
+      last_name: contact.last_name,
+      email: contact.email,
+      phone: contact.phone,
+    },
+    select: {
+      id: true,
+      first_name: true,
+      last_name: true,
+      email: true,
+      phone: true,
+    },
+  });
+};
+
+const remove = async (user, contactId) => {
+  contactId = validate(getContactValidation, contactId);
+  await get(user, contactId);
+  return prismaClient.contact.delete({
+    where: {
+      id: contactId,
+    },
+  });
+};
+
+export default { create, get, update, remove };
