@@ -1,6 +1,6 @@
 import { logger } from "./application/logging.js";
 import { web } from "./application/web.js";
 
-web.listen(300, () => {
-  logger.info("App start");
+web.listen(3000, () => {
+  logger.info("App start at http://localhost:3000");
 });

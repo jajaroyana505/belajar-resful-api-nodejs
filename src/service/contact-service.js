@@ -5,7 +5,7 @@ import {
   getContactValidation,
   searchContactValidation,
   updateContactValidation,
-} from "../validation/contact-validation";
+} from "../validation/contact-validation.js";
 import { validate } from "../validation/validation.js";
 
 const create = async (user, request) => {
